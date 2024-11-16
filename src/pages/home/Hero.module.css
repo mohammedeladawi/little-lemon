@@ -10,13 +10,13 @@
   gap: 20px;
 }
 
-.title h1 {
+.titles h1 {
   font-size: 64px;
   font-weight: bold;
   color: var(--primary-color-2nd);
 }
 
-.title h2 {
+.titles h2 {
   font-size: 40px;
   font-weight: 100;
   color: #fff;
