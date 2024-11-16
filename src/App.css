@@ -1,3 +1,18 @@
-.logo {
-  max-width: 200px;
+:root {
+  --primary-color-1st: #495057;
+  --primary-color-2nd: #f4ce14;
+  --secondary-color-1st: #ee9972;
+  --secondary-color-2nd: #fbdabb;
+  --secondary-color-3rd: #edefee;
+  --secondary-color-4th: #333333;
+  --main-transition-duration: 0.3s;
+  --main-radius: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
 }

@@ -1,0 +1,20 @@
+.specials-section {
+}
+
+.specials-header {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.specials-header h2 {
+  font-size: 40px;
+  font-weight: normal;
+}
+
+.specials-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+  gap: 32px;
+}

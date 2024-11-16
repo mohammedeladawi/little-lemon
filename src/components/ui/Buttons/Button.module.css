@@ -1,0 +1,25 @@
+.btn {
+  display: block;
+  width: 200px;
+  height: 60px;
+  align-content: center;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: var(--main-radius);
+  transition: var(--main-transition-duration);
+}
+
+.btn-primary {
+  color: #000;
+  background-color: var(--primary-color-2nd);
+}
+
+.btn-primary:hover {
+  opacity: 90%;
+}
+
+.btn-primary:active {
+  background-color: var(--secondary-color-4th);
+  color: #fff;
+}
