@@ -3,23 +3,11 @@
   margin-bottom: 50px;
 }
 
-@media (max-width: 767px) {
-  .hero-section {
-    /* text-align: center; */
-  }
-}
-
 .hero-info {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
-}
-
-@media (max-width: 767px) {
-  .hero-info {
-    /* align-items: center; */
-  }
 }
 
 .title h1 {
