@@ -15,7 +15,7 @@ const Hero = () => {
     <section className={styles["hero-section"]}>
       <Container addStyle={containerStyle}>
         <div className={styles["hero-info"]}>
-          <div className={styles.title}>
+          <div className={styles.titles}>
             <h1>Little Lemon</h1>
             <h2>Chicago</h2>
           </div>
@@ -26,7 +26,7 @@ const Hero = () => {
           <Button href="#">Reserve a Table</Button>
         </div>
         <div className={styles["hero-img"]}>
-          <img src={restaurantFood} alt="A cheif come with food"></img>
+          <img src={restaurantFood} alt="A cheif come with food" />
         </div>
       </Container>
     </section>

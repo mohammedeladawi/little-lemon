@@ -1,12 +1,19 @@
 import React from "react";
 import footerLogo from "../assets/images/Asset 9@4x.png";
 import Container from "../components/grid-system/Container";
+import styles from "./Footer.module.css";
+
+const containerStyle = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fill, minmax(211px, 1fr))",
+  gap: "35px",
+};
 
 const Footer = () => {
   return (
-    <footer>
-      <Container>
-        <img className="logo" src={footerLogo} alt="Footer Logo" />
+    <footer className={styles["footer-section"]}>
+      <Container addStyle={containerStyle}>
+        <img className={styles["logo"]} src={footerLogo} alt="Footer Logo" />
         {/* Quick Links */}
         <nav>
           <h4>Doormat Navigation</h4>
@@ -32,7 +39,7 @@ const Footer = () => {
         <address>
           <h4>Contact Us</h4>
           <p>
-            Email:{" "}
+            Email:
             <a href="mailto:info@littlelemon.com">info@littlelemon.com</a>
           </p>
           <p>
