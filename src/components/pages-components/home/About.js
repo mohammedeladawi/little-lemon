@@ -1,13 +1,14 @@
 import React from "react";
-import ImgA from "../../assets/images/Mario and Adrian A.jpg";
-import ImgB from "../../assets/images/Mario and Adrian b.jpg";
-import Container from "../../components/grid-system/Container";
+import ImgA from "../../../assets/images/Mario and Adrian A.jpg";
+import ImgB from "../../../assets/images/Mario and Adrian b.jpg";
+import Container from "../../grid-system/Container";
 import styles from "./About.module.css";
 
 const containerStyle = {
   display: "flex",
   justifyContent: "space-between",
   gap: "20px",
+  marginBottom: "100px",
 };
 
 const About = () => {

@@ -1,12 +1,12 @@
 import React from "react";
 import SpecialsCard from "./cards/SpecialsCard";
-import Container from "../../components/grid-system/Container";
-import Button from "../../components/ui/Buttons/Button";
+import Container from "../../grid-system/Container";
+import Button from "../../ui/buttons/Button";
 import styles from "./Specials.module.css";
 
 const specialItems = [
   {
-    img: require("../../assets/images/greek salad.jpg"),
+    img: require("../../../assets/images/greek salad.jpg"),
     title: "Greek Salad",
     price: "$12.99",
     details:
@@ -14,7 +14,7 @@ const specialItems = [
     href: "#",
   },
   {
-    img: require("../../assets/images/957db75e6b654e07f65da12b96dc858c5995ed28.jpg"),
+    img: require("../../../assets/images/957db75e6b654e07f65da12b96dc858c5995ed28.jpg"),
     title: "Bruchetta",
     price: "$5.99",
     details:
@@ -22,7 +22,7 @@ const specialItems = [
     href: "#",
   },
   {
-    img: require("../../assets/images/lemon dessert.jpg"),
+    img: require("../../../assets/images/lemon dessert.jpg"),
     title: "Lemon Dessert",
     price: "$5.00",
     details:

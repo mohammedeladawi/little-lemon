@@ -1,8 +1,8 @@
 import React from "react";
-import restaurantFood from "../../assets/images/restauranfood.jpg";
-import Container from "../../components/grid-system/Container";
+import restaurantFood from "../../../assets/images/restauranfood.jpg";
+import Container from "../../grid-system/Container";
 import styles from "./Hero.module.css";
-import Button from "../../components/ui/Buttons/Button";
+import Button from "../../ui/buttons/Button";
 
 const containerStyle = {
   display: "flex",

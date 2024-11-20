@@ -1,6 +1,6 @@
 import React from "react";
-import logo from "../assets/images/Logo.svg";
-import Container from "../components/grid-system/Container";
+import logo from "../../assets/images/Logo.svg";
+import Container from "../grid-system/Container";
 
 const containerStyle = {
   display: "flex",

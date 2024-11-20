@@ -1,9 +1,8 @@
 import React, { Fragment } from "react";
-import Header from "./layouts/Header";
-import Nav from "./layouts/Nav";
-import Main from "./layouts/Main";
-import Footer from "./layouts/Footer";
-import "./App.css";
+import Header from "./components/layouts/Header";
+import Nav from "./components/layouts/Nav";
+import Home from "./pages/Home";
+import Footer from "./components/layouts/Footer";
 
 function App() {
   return (
@@ -11,7 +10,7 @@ function App() {
       <Header>
         <Nav />
       </Header>
-      <Main />
+      <Home />
       <Footer />
     </Fragment>
   );

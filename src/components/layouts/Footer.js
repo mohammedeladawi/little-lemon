@@ -1,6 +1,6 @@
 import React from "react";
-import footerLogo from "../assets/images/Asset 9@4x.png";
-import Container from "../components/grid-system/Container";
+import footerLogo from "../../assets/images/Asset 9@4x.png";
+import Container from "../grid-system/Container";
 import styles from "./Footer.module.css";
 
 const containerStyle = {
