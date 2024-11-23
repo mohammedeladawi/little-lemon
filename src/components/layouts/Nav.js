@@ -1,4 +1,4 @@
-import { List, X } from "@phosphor-icons/react";
+import { List, ShoppingCartSimple, X } from "@phosphor-icons/react";
 import React, { useRef } from "react";
 import styles from "./Nav.module.css";
 
@@ -21,7 +21,9 @@ const Nav = () => {
         </div>
         <ul>
           <li>
-            <a href="#home">Home</a>
+            <a href="#home" className="active">
+              Home
+            </a>
           </li>
           <li>
             <a href="#about">About</a>
@@ -36,7 +38,19 @@ const Nav = () => {
             <a href="#order-online">Order Online</a>
           </li>
           <li>
-            <a href="#login">Login</a>
+            <a href="/login" className={styles["user-actions_login"]}>
+              Login
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <nav className={styles["user-actions"]}>
+        <ul>
+          <li>
+            <a href="/cart" className={styles["user-actions_cart"]}>
+              <span className={styles["items-count"]}>0</span>
+              <ShoppingCartSimple size={32} />
+            </a>
           </li>
         </ul>
       </nav>

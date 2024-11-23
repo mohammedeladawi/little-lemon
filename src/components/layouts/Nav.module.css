@@ -1,38 +1,77 @@
-.nav-menu {
-  flex: 1;
-}
-
-.nav-menu ul {
-  display: flex;
-  gap: 20px;
-  justify-content: space-evenly;
-}
-
-.nav-menu a {
-  font-weight: 500;
-  font-size: 20px;
-  color: #000;
-  transition: var(--main-transition-duration);
-}
-
-.nav-menu a:hover {
-  opacity: 50%;
-}
-
-.nav-menu a:active {
-  color: var(--primary-color-1st);
-}
-
+/* burger-icon on tablet and mobile devices */
 @media (max-width: 991px) {
   .burger-icon {
     cursor: pointer;
     transition-duration: var(--main-transition-duration);
+    color: var(--primary-color-1st);
+    order: 1;
   }
 
   .burger-icon:hover {
-    color: var(--primary-color-1st);
+    opacity: 70%;
   }
 
+  .burger-icon:active {
+    border: 1px solid var(--primary-color-1st);
+  }
+}
+
+/* navigation bar elements styles */
+.nav-menu ul,
+.user-actions ul {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-menu a,
+.user-actions a {
+  padding: 3px 7px;
+  color: var(--primary-color-1st);
+  font-weight: 500;
+  font-size: 20px;
+  transition: var(--main-transition-duration);
+  border-radius: var(--main-radius);
+}
+
+.nav-menu a:not(:global(.active)):hover,
+.user-actions a:not(:global(.active)):hover {
+  opacity: 70%;
+}
+
+.nav-menu a:active,
+.nav-menu a:global(.active),
+.user-actions a:active,
+.user-actions a:global(.active) {
+  color: #fff;
+  background-color: var(--primary-color-1st);
+}
+
+/* change active colors on tablets and mobile devices */
+@media (max-width: 991px) {
+  .nav-menu a:active,
+  .nav-menu a:global(.active) {
+    color: var(--primary-color-1st);
+    background-color: var(--primary-color-2nd);
+  }
+}
+
+/* shopping-cart styles */
+.user-actions_cart {
+  position: relative;
+  display: inline-block;
+}
+
+.user-actions_cart .items-count {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+}
+
+/* show navigaiton-menu on tablets and mobile devices*/
+@media (max-width: 991px) {
   .nav-menu {
     transform: translateX(100%);
     transition-duration: var(--main-transition-duration);
@@ -86,6 +125,10 @@
     padding: 10px;
     color: #fff;
     width: 100%;
+  }
+
+  .user-actions {
+    order: 0;
   }
 }
 
