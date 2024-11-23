@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../../assets/images/Logo.svg";
 import Container from "../grid-system/Container";
+import styles from "./Header.module.css";
 
 const containerStyle = {
   display: "flex",
@@ -11,14 +12,11 @@ const containerStyle = {
 
 const Header = ({ children }) => {
   return (
-    <header>
+    <header className={styles["header-section"]}>
       <Container addStyle={containerStyle}>
-        <img
-          className="logo"
-          style={{ width: "195px" }}
-          src={logo}
-          alt="Header logo"
-        />
+        <div className={styles["img-container"]}>
+          <img className={styles["logo"]} src={logo} alt="Header logo" />
+        </div>
         {children}
       </Container>
     </header>

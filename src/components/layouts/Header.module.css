@@ -1,0 +1,9 @@
+@media (max-width: 991px) {
+  .header-section .img-container {
+    flex: 1;
+  }
+}
+
+.logo {
+  width: "195px";
+}
