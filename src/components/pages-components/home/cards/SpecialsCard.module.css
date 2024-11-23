@@ -1,10 +1,22 @@
 .card-specials {
+  flex-basis: 260px;
+  flex-shrink: 0;
   font-family: "Karla", "sans";
   background-color: var(--secondary-color-3rd);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-width: 3px;
+  border-style: solid;
+  border-color: transparent #bfbfbf #bfbfbf transparent;
+  border-radius: var(--main-radius);
+}
+
+@media (max-width: 768px) {
+  .card-specials {
+    flex-basis: 230px;
+  }
 }
 
 .card-img-top {
@@ -37,15 +49,6 @@
 
 .card-body {
   flex-grow: 1;
-}
-
-.order-link {
-  font-weight: bold;
-  color: #000;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  width: fit-content;
 }
 
 .card-header,

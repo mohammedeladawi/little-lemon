@@ -1,6 +1,7 @@
 import React from "react";
 import { Moped } from "@phosphor-icons/react";
 import styles from "./SpecialsCard.module.css";
+import Button from "../../../ui/buttons/Button";
 
 const SpecialsCard = ({
   dishSrc,
@@ -24,10 +25,20 @@ const SpecialsCard = ({
       </div>
 
       <div className={styles["card-footer"]}>
-        <a className={styles["order-link"]} href={orderHref}>
+        <Button
+          addStyle={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "5px",
+            width: "177px",
+            height: "36px",
+          }}
+          href={orderHref}
+        >
           <span>Order a delivery</span>
           <Moped size={18} weight="fill" />
-        </a>
+        </Button>
       </div>
     </div>
   );

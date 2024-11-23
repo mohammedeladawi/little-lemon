@@ -28,18 +28,17 @@
   color: var(--secondary-color-4th);
 }
 
-@media (max-width: 991px) {
+@media (max-width: 992px) {
   .about-imgs {
     display: none;
   }
 }
 
 @media (min-width: 992px) {
-  .details {
-    width: 370px;
-  }
   .about-imgs {
     position: relative;
+    width: 450px;
+    height: 400px;
   }
 
   .about-imgs img {
@@ -55,7 +54,7 @@
   }
 
   .about-imgs img:last-of-type {
-    right: 100px;
-    top: 100px;
+    left: 0;
+    top: 78px;
   }
 }

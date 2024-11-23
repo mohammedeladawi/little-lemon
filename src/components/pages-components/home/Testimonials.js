@@ -8,25 +8,29 @@ const reviews = [
     name: "Mark",
     avatarSrc: require("../../../assets/images/reviewer_1.jpg"),
     rating: 5,
-    reviewText: "The best!",
+    reviewText:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
   },
   {
     name: "Matilda",
     avatarSrc: require("../../../assets/images/reviewer_2.jpg"),
     rating: 3,
-    reviewText: "Liked it",
+    reviewText:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
   },
   {
     name: "Nahla",
     avatarSrc: require("../../../assets/images/reviewer_3.jpg"),
     rating: 4,
-    reviewText: "Delicious!",
+    reviewText:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
   },
   {
     name: "Noah",
     avatarSrc: require("../../../assets/images/reviewer_4.jpg"),
     rating: 5,
-    reviewText: "Amazing!",
+    reviewText:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
   },
 ];
 

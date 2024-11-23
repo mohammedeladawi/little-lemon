@@ -3,6 +3,12 @@
   margin-bottom: 50px;
 }
 
+@media (max-width: 768px) {
+  .hero-section {
+    margin-bottom: 0px;
+  }
+}
+
 .hero-info {
   display: flex;
   flex-direction: column;

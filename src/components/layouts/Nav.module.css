@@ -1,5 +1,5 @@
 /* burger-icon on tablet and mobile devices */
-@media (max-width: 991px) {
+@media (max-width: 992px) {
   .burger-icon {
     cursor: pointer;
     transition-duration: var(--main-transition-duration);
@@ -31,7 +31,6 @@
   font-weight: 500;
   font-size: 20px;
   transition: var(--main-transition-duration);
-  border-radius: var(--main-radius);
 }
 
 .nav-menu a:not(:global(.active)):hover,
@@ -41,10 +40,13 @@
 
 .nav-menu a:active,
 .nav-menu a:global(.active),
-.user-actions a:active,
 .user-actions a:global(.active) {
   color: #fff;
   background-color: var(--primary-color-1st);
+}
+
+.user-actions_cart:active {
+  border: 1px solid var(--primary-color-1st);
 }
 
 /* change active colors on tablets and mobile devices */
@@ -92,6 +94,7 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+    z-index: 1000;
   }
 
   .nav-menu .close-menu {

@@ -15,12 +15,16 @@ const TestimonialsCard = ({ rating, avatarSrc, reviewerName, reviewText }) => {
       </div>
 
       <div className={styles["card-body"]}>
-        <img src={avatarSrc} className={styles["card-avatar"]} alt="Reviewer" />
-        <h5 className={styles["reviewer-name"]}>{reviewerName}</h5>
+        <p className={styles["review-text"]}>{reviewText}</p>
       </div>
 
       <div className={styles["card-footer"]}>
-        <p className={styles["card-review"]}>{reviewText}</p>
+        <h5 className={styles["reviewer-name"]}>{reviewerName}</h5>
+        <img
+          src={avatarSrc}
+          className={styles["reviewer-img"]}
+          alt="Reviewer"
+        />
       </div>
     </div>
   );
