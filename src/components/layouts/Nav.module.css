@@ -31,6 +31,7 @@
   font-weight: 500;
   font-size: 20px;
   transition: var(--main-transition-duration);
+  border-radius: var(--main-radius);
 }
 
 .nav-menu a:not(:global(.active)):hover,

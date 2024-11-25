@@ -23,7 +23,7 @@ const Hero = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
-          <Button href="#">Reserve a Table</Button>
+          <Button href="/reservations">Reserve a Table</Button>
         </div>
         <div className={styles["hero-img"]}>
           <img src={restaurantFood} alt="A cheif come with food" />

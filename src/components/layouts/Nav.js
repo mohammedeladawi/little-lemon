@@ -1,6 +1,7 @@
 import { List, ShoppingCartSimple, X } from "@phosphor-icons/react";
 import React, { useRef } from "react";
 import styles from "./Nav.module.css";
+import { NavLink } from "react-router-dom";
 
 const Nav = () => {
   const navigationMenuRef = useRef(null);
@@ -21,36 +22,37 @@ const Nav = () => {
         </div>
         <ul>
           <li>
-            <a href="#home" className="active">
-              Home
-            </a>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <a href="#about">About</a>
+            <NavLink to="/about">About</NavLink>
           </li>
           <li>
-            <a href="#menu">Menu</a>
+            <NavLink to="/menu">Menu</NavLink>
           </li>
           <li>
-            <a href="#reservation">Reservations</a>
+            <NavLink to="/reservations">Reservations</NavLink>
           </li>
           <li>
-            <a href="#order-online">Order Online</a>
+            <NavLink to="/order-online">Order Online</NavLink>
           </li>
           <li>
-            <a href="/login" className={styles["user-actions_login"]}>
+            <NavLink to="/login" className={styles["user-actions_login"]}>
               Login
-            </a>
+            </NavLink>
           </li>
         </ul>
       </nav>
       <nav className={styles["user-actions"]}>
         <ul>
           <li>
-            <a href="/cart" className={styles["user-actions_cart"]}>
+            <NavLink
+              to="/shopping-cart"
+              className={styles["user-actions_cart"]}
+            >
               <span className={styles["items-count"]}>0</span>
               <ShoppingCartSimple size={32} />
-            </a>
+            </NavLink>
           </li>
         </ul>
       </nav>

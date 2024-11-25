@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../../assets/images/Logo.svg";
 import Container from "../grid-system/Container";
 import styles from "./Header.module.css";
+import { Link } from "react-router-dom";
 
 const containerStyle = {
   display: "flex",
@@ -14,9 +15,9 @@ const Header = ({ children }) => {
   return (
     <header className={styles["header-section"]}>
       <Container addStyle={containerStyle}>
-        <div className={styles["img-container"]}>
+        <Link to="/" className={styles["img-container"]}>
           <img className={styles["logo"]} src={logo} alt="Header logo" />
-        </div>
+        </Link>
         {children}
       </Container>
     </header>

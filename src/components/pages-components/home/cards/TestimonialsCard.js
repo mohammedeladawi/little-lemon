@@ -5,7 +5,7 @@ import styles from "./TestimonialsCard.module.css";
 const TestimonialsCard = ({ rating, avatarSrc, reviewerName, reviewText }) => {
   let stars = [];
   for (let i = 0; i < rating; i++) {
-    stars.push(<Star size={22} weight="fill" />);
+    stars.push(<Star size={22} weight="fill" key={i} />);
   }
 
   return (

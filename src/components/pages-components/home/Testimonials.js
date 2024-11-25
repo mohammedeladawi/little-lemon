@@ -44,13 +44,13 @@ const Testimonials = () => {
           <h2>Testimonials</h2>
         </div>
         <div className={styles["testimonials-body"]}>
-          {reviews.map((review, index) => (
+          {reviews.map((review, idx) => (
             <TestimonialsCard
-              key={index}
               rating={review.rating}
               avatarSrc={review.avatarSrc}
               reviewerName={review.name}
               reviewText={review.reviewText}
+              key={idx}
             />
           ))}
         </div>
