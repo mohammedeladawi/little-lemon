@@ -24,8 +24,10 @@ const SelectOptions = ({
           {defaultPlaceHolder}
         </option>
 
-        {optionsItems.map((item) => (
-          <option value={item.value}> {item.title}</option>
+        {optionsItems.map((item, idx) => (
+          <option value={item.value} key={idx}>
+            {item.title}
+          </option>
         ))}
       </select>
     </div>

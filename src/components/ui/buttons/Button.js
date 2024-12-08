@@ -2,15 +2,24 @@ import React from "react";
 import styles from "./Button.module.css";
 import { Link } from "react-router-dom";
 
-const Button = ({ children, href, type = "primary", addStyle }) => {
+const Button = ({
+  buttonTag = Link,
+  children,
+  href,
+  colorType = "primary",
+  addStyle,
+  ...properties
+}) => {
+  const Tag = buttonTag;
   return (
-    <Link
+    <Tag
       to={href}
-      className={`${styles["btn"]} ${styles[`btn-${type}`]}`}
+      className={`${styles["btn"]} ${styles[`btn-${colorType}`]}`}
       style={addStyle}
+      {...properties}
     >
       {children}
-    </Link>
+    </Tag>
   );
 };
 

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import Container from "../../grid-system/Container";
 import SelectOptions from "./select/SelectOptions";
 import { BeerStein, CalendarDots, Clock, User } from "@phosphor-icons/react";
+import styles from "./ReservationForm.module.css";
+import Button from "../../ui/buttons/Button";
 
 const ReservationForm = () => {
   const dinersItemsOptions = [
@@ -15,54 +18,76 @@ const ReservationForm = () => {
   const [timeAvailableOptions, setTimeAvailableOptions] = useState([]);
 
   return (
-    <div className="reservation-form">
-      <h2 className="reservation-title">Reservation</h2>
-      <div>
-        <label htmlFor="indoor">Indoor Seating</label>
-        <input type="radio" id="indoor" name="seat" value="indoor" />
-      </div>
+    <section className={styles["reservation-form-section"]}>
+      <Container>
+        <h2 className={styles["reservation-form_title"]}>Reservation</h2>
 
-      <div>
-        <label htmlFor="outdoor">Outdoor Seating</label>
-        <input type="radio" id="outdoor" name="seat" value="outdoor" />
-      </div>
+        <form className={styles["reservation-form"]}>
+          <div className={styles["reservation-form_inputs"]}>
+            <div className={styles["radio"]}>
+              <label htmlFor="indoor">Indoor Seating</label>
+              <input type="radio" id="indoor" name="seat" value="indoor" />
+            </div>
 
-      <div id="date-container">
-        <label htmlFor="date">Date</label>
-        <CalendarDots size={32} />
-        <input type="date" name="date" id="date" className="reservation-date" />
-      </div>
+            <div className={styles["radio"]}>
+              <label htmlFor="outdoor">Outdoor Seating</label>
+              <input type="radio" id="outdoor" name="seat" value="outdoor" />
+            </div>
 
-      <div>
-        <SelectOptions
-          labelTitle="Number of Diners"
-          htmlFor="diners"
-          icon={<User size={32} />}
-          defaultPlaceHolder="No.Diners"
-          optionsItems={dinersItemsOptions}
-        />
-      </div>
+            <div className={styles["select"]} id="date-container">
+              <label htmlFor="date">Date</label>
+              <CalendarDots size={32} />
+              <input
+                type="date"
+                name="date"
+                id="date"
+                className={styles["reservation-form_date"]}
+              />
+            </div>
 
-      <div>
-        <SelectOptions
-          labelTitle="Ocassion"
-          htmlFor="ocassion"
-          icon={<BeerStein size={32} />}
-          defaultPlaceHolder="Occasion"
-          optionsItems={occasionItemsOptions}
-        />
-      </div>
+            <div className={styles["select"]}>
+              <SelectOptions
+                labelTitle="Number of Diners"
+                htmlFor="diners"
+                icon={<User size={32} />}
+                defaultPlaceHolder="No.Diners"
+                optionsItems={dinersItemsOptions}
+              />
+            </div>
 
-      <div>
-        <SelectOptions
-          labelTitle="Time"
-          htmlFor="time"
-          icon={<Clock size={32} />}
-          defaultPlaceHolder="Select Time"
-          optionsItems={timeAvailableOptions}
-        />
-      </div>
-    </div>
+            <div className={styles["select"]}>
+              <SelectOptions
+                labelTitle="Ocassion"
+                htmlFor="ocassion"
+                icon={<BeerStein size={32} />}
+                defaultPlaceHolder="Occasion"
+                optionsItems={occasionItemsOptions}
+              />
+            </div>
+
+            <div className={styles["select"]}>
+              <SelectOptions
+                labelTitle="Time"
+                htmlFor="time"
+                icon={<Clock size={32} />}
+                defaultPlaceHolder="Select Time"
+                optionsItems={timeAvailableOptions}
+              />
+            </div>
+          </div>
+
+          <div className={styles["reservation-form_submit"]}>
+            <Button
+              buttonTag={"button"}
+              type="submit"
+              // addStyle={{ width: "165px", height: "40px" }}
+            >
+              Reserve a Table
+            </Button>
+          </div>
+        </form>
+      </Container>
+    </section>
   );
 };
 

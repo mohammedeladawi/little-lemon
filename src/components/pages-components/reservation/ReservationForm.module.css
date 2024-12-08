@@ -1,0 +1,41 @@
+.reservation-form-section {
+  background-color: var(--primary-color-1st);
+}
+
+.reservation-form_title {
+  font-family: "Karla", "sans-serif";
+  color: var(--primary-color-2nd);
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.reservation-form_inputs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.reservation-form_inputs div {
+  flex-basis: 40%;
+}
+
+.reservation-form_inputs label {
+  color: #fff;
+  font-size: 24px;
+}
+
+.reservation-form_inputs .radio label {
+  margin-right: 38px;
+}
+
+.reservation-form_inputs .select label {
+  display: block;
+}
+
+.reservation-form_submit {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
