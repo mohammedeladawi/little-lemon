@@ -14,20 +14,47 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 10px;
+  gap: 15px;
+}
+
+@media (max-width: 576px) {
+  .reservation-form_inputs {
+    flex-direction: column-reverse;
+  }
 }
 
 .reservation-form_inputs div {
-  flex-basis: 40%;
+  flex-basis: 45%;
 }
 
 .reservation-form_inputs label {
-  color: #fff;
-  font-size: 24px;
+  color: var(--secondary-color-3rd);
 }
 
 .reservation-form_inputs .radio label {
-  margin-right: 38px;
+  font-size: 24px;
+}
+.reservation-form_inputs .select label {
+  font-size: 18px;
+}
+
+.reservation-form_inputs .radio {
+  width: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+@media (max-width: 576px) {
+  .reservation-form_inputs .radio {
+    justify-content: space-between;
+  }
+}
+
+.reservation-form_inputs .radio input,
+.reservation-form_inputs .radio label {
+  cursor: pointer;
 }
 
 .reservation-form_inputs .select label {
