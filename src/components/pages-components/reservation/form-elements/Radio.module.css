@@ -1,0 +1,31 @@
+.custom-label {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 170px;
+}
+
+.custom-radio {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  position: relative;
+}
+
+.custom-radio--checked {
+  background-color: #fff;
+  display: block;
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.custom-radio input[type="radio"] {
+  appearance: none;
+}

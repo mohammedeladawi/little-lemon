@@ -23,7 +23,7 @@
   }
 }
 
-.reservation-form_inputs div {
+.reservation-form_inputs > div {
   flex-basis: 45%;
 }
 
@@ -40,10 +40,6 @@
 
 .reservation-form_inputs .radio {
   width: 170px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 20px;
 }
 
 @media (max-width: 576px) {

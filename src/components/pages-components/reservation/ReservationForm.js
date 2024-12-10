@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Container from "../../grid-system/Container";
-import Dropdown from "./dropdown/Dropdown";
+import Dropdown from "./form-elements/Dropdown";
 import { BeerStein, CalendarDots, Clock, User } from "@phosphor-icons/react";
 import styles from "./ReservationForm.module.css";
 import Button from "../../ui/buttons/Button";
+import Radio from "./form-elements/Radio";
 
 const generateDateList = () => {
   const dateList = [];
@@ -82,19 +83,19 @@ const ReservationForm = () => {
         <div className={styles["reservation-form"]}>
           <div className={styles["reservation-form_inputs"]}>
             <div className={styles["radio"]}>
-              <label htmlFor="indoor">Indoor Seating</label>
-              <input
-                type="radio"
-                id="indoor"
-                name="seat"
-                value="indoor"
-                checked={true}
+              <Radio
+                title="Indoor Seating"
+                inputName="seating"
+                inputValue="indoor"
               />
             </div>
 
             <div className={styles["radio"]}>
-              <label htmlFor="outdoor">Outdoor Seating</label>
-              <input type="radio" id="outdoor" name="seat" value="outdoor" />
+              <Radio
+                title="Outdoor Seating"
+                inputName="seating"
+                inputValue="outdoor"
+              />
             </div>
 
             <div className={styles["select"]} id="date-container">
