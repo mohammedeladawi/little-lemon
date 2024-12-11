@@ -55,3 +55,11 @@
   padding: 4px;
   text-align: center;
 }
+
+.error-message {
+  font-size: 15px;
+  color: var(--secondary-color-1st);
+  margin-top: 3px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}

@@ -73,7 +73,34 @@ const generateTimeList = (
 };
 
 const ReservationForm = () => {
-  const [timeAvailableOptions, setTimeAvailableOptions] = useState([]);
+  // Radio elements
+  const [seatValue, setSeatValue] = useState("indoor");
+
+  // Dropdown elements
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDinersNum, setSelectedDinersNum] = useState(null);
+  const [selectedOcassion, setSelectedOcassion] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+
+  // Submit button
+  const [isSubmited, setIsSumbited] = useState(false);
+
+  // const [timeAvailableOptions, setTimeAvailableOptions] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSumbited(true);
+    if (
+      !selectedDate ||
+      !selectedDinersNum ||
+      !selectedOcassion ||
+      !selectedTime
+    )
+      return;
+
+    // Do Action
+    console.log("Submited");
+  };
 
   return (
     <section className={styles["reservation-form-section"]}>
@@ -87,6 +114,8 @@ const ReservationForm = () => {
                 title="Indoor Seating"
                 inputName="seating"
                 inputValue="indoor"
+                isChecked={seatValue == "indoor"}
+                setSeatValue={setSeatValue}
               />
             </div>
 
@@ -95,6 +124,8 @@ const ReservationForm = () => {
                 title="Outdoor Seating"
                 inputName="seating"
                 inputValue="outdoor"
+                isChecked={seatValue === "outdoor"}
+                setSeatValue={setSeatValue}
               />
             </div>
 
@@ -104,6 +135,9 @@ const ReservationForm = () => {
                 title="Select Date"
                 optionItems={generateDateList()}
                 icon={<CalendarDots size={24} />}
+                selectedValue={selectedDate}
+                setSelectedValue={setSelectedDate}
+                isSubmited={isSubmited}
               />
             </div>
 
@@ -113,6 +147,9 @@ const ReservationForm = () => {
                 title="No. of Diners"
                 optionItems={dinerOptions}
                 icon={<User size={24} />}
+                selectedValue={selectedDinersNum}
+                setSelectedValue={setSelectedDinersNum}
+                isSubmited={isSubmited}
               />
             </div>
 
@@ -122,6 +159,9 @@ const ReservationForm = () => {
                 title="Ocassion"
                 icon={<BeerStein size={24} />}
                 optionItems={occasionOptions}
+                selectedValue={selectedOcassion}
+                setSelectedValue={setSelectedOcassion}
+                isSubmited={isSubmited}
               />
             </div>
 
@@ -131,6 +171,9 @@ const ReservationForm = () => {
                 title="Time"
                 icon={<Clock size={24} />}
                 optionItems={generateTimeList()}
+                selectedValue={selectedTime}
+                setSelectedValue={setSelectedTime}
+                isSubmited={isSubmited}
               />
             </div>
           </div>
@@ -140,6 +183,7 @@ const ReservationForm = () => {
               buttonTag={"button"}
               type="submit"
               addStyle={{ marginTop: "15px" }}
+              onClick={handleSubmit}
             >
               Reserve a Table
             </Button>
