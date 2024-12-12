@@ -17,20 +17,34 @@
 }
 
 .options-list {
+  opacity: 0;
+  transform-origin: top;
+  max-height: 0;
   width: 100%;
   position: absolute;
   z-index: 1;
   gap: 13px;
-  background-color: var(--secondary-color-3rd);
   top: calc(100% + 4px);
   background-color: #fff;
   font-weight: normal;
+  overflow: hidden;
+  transition: opacity var(--main-transition-duration) ease;
+}
+
+.options-list.open {
+  opacity: 1;
   max-height: 150px;
   overflow-y: scroll;
 }
 
 .options-list li {
   cursor: pointer;
+  transition-duration: var(--main-transition-duration);
+}
+
+.options-list li:hover,
+.options-list li.active {
+  background-color: var(--secondary-color-3rd);
 }
 
 .options-list:not(.divide) li {

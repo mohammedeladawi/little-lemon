@@ -82,6 +82,8 @@ const ReservationForm = () => {
   const [selectedOcassion, setSelectedOcassion] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
 
+  const [openDropdown, setOpenDropdown] = useState(null);
+
   // Submit button
   const [isSubmited, setIsSumbited] = useState(false);
 
@@ -132,48 +134,60 @@ const ReservationForm = () => {
             <div className={styles["select"]} id="date-container">
               <label>Date</label>
               <Dropdown
+                id="date"
                 title="Select Date"
                 optionItems={generateDateList()}
                 icon={<CalendarDots size={24} />}
                 selectedValue={selectedDate}
                 setSelectedValue={setSelectedDate}
                 isSubmited={isSubmited}
+                openDropdown={openDropdown}
+                setOpenDropdown={setOpenDropdown}
               />
             </div>
 
             <div className={styles["select"]}>
               <label>Number of Diners</label>
               <Dropdown
+                id="diners"
                 title="No. of Diners"
                 optionItems={dinerOptions}
                 icon={<User size={24} />}
                 selectedValue={selectedDinersNum}
                 setSelectedValue={setSelectedDinersNum}
                 isSubmited={isSubmited}
+                openDropdown={openDropdown}
+                setOpenDropdown={setOpenDropdown}
               />
             </div>
 
             <div className={styles["select"]}>
               <label>Ocassion</label>
               <Dropdown
+                id="ocassion"
                 title="Ocassion"
                 icon={<BeerStein size={24} />}
                 optionItems={occasionOptions}
                 selectedValue={selectedOcassion}
                 setSelectedValue={setSelectedOcassion}
                 isSubmited={isSubmited}
+                openDropdown={openDropdown}
+                setOpenDropdown={setOpenDropdown}
               />
             </div>
 
             <div className={styles["select"]}>
               <label>Time</label>
               <Dropdown
+                id="time"
                 title="Time"
                 icon={<Clock size={24} />}
                 optionItems={generateTimeList()}
                 selectedValue={selectedTime}
                 setSelectedValue={setSelectedTime}
                 isSubmited={isSubmited}
+                openDropdown={openDropdown}
+                setOpenDropdown={setOpenDropdown}
               />
             </div>
           </div>

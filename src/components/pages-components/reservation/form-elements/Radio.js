@@ -9,7 +9,11 @@ const Radio = ({ title, inputName, inputValue, isChecked, setSeatValue }) => {
   return (
     <label className={styles["custom-label"]}>
       <div className={styles["custom-radio"]}>
-        {isChecked && <span className={styles["custom-radio--checked"]}></span>}
+        <span
+          className={`${styles["inner-circle"]} ${
+            isChecked ? styles["inner-circle--checked"] : ""
+          }`}
+        ></span>
         <input
           type="radio"
           name={inputName}

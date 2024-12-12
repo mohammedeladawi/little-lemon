@@ -14,16 +14,22 @@
   position: relative;
 }
 
-.custom-radio--checked {
+.custom-radio .inner-circle {
   background-color: #fff;
   display: block;
   position: absolute;
-  width: 8px;
-  height: 8px;
   border-radius: 50%;
   left: 50%;
   top: 50%;
+  width: 0px;
+  height: 0px;
   transform: translate(-50%, -50%);
+  transition-duration: var(--main-transition-duration);
+}
+
+.custom-radio .inner-circle--checked {
+  width: 8px;
+  height: 8px;
 }
 
 .custom-radio input[type="radio"] {
