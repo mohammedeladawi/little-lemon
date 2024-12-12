@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import Container from "../../grid-system/Container";
 import Dropdown from "./form-elements/Dropdown";
 import { BeerStein, CalendarDots, Clock, User } from "@phosphor-icons/react";
@@ -36,7 +36,7 @@ const dinerOptions = [
 
 const occasionOptions = ["Birthday", "Engagement", "Anniversary"];
 
-const generateTimeList = (
+const initialTimeList = (
   startTime = "13:00",
   endTime = "23:59",
   intervalMinutes = 60
@@ -72,6 +72,17 @@ const generateTimeList = (
   return timeList;
 };
 
+const updateTime = (state, action) => {
+  switch (action.type) {
+    case "update_times":
+      // Update in the future
+      console.log(action.payload.date);
+      return ["10.00 PM"];
+    default:
+      return state;
+  }
+};
+
 const ReservationForm = () => {
   // Radio elements
   const [seatValue, setSeatValue] = useState("indoor");
@@ -84,10 +95,10 @@ const ReservationForm = () => {
 
   const [openDropdown, setOpenDropdown] = useState(null);
 
+  const [timeAvailable, dispatch] = useReducer(updateTime, initialTimeList());
+
   // Submit button
   const [isSubmited, setIsSumbited] = useState(false);
-
-  // const [timeAvailableOptions, setTimeAvailableOptions] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -143,6 +154,7 @@ const ReservationForm = () => {
                 isSubmited={isSubmited}
                 openDropdown={openDropdown}
                 setOpenDropdown={setOpenDropdown}
+                updateTime={dispatch}
               />
             </div>
 
@@ -182,7 +194,7 @@ const ReservationForm = () => {
                 id="time"
                 title="Time"
                 icon={<Clock size={24} />}
-                optionItems={generateTimeList()}
+                optionItems={timeAvailable}
                 selectedValue={selectedTime}
                 setSelectedValue={setSelectedTime}
                 isSubmited={isSubmited}
