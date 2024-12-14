@@ -43,7 +43,11 @@ const Dropdown = ({
 
   return (
     <div className={styles["dropdown-container"]}>
-      <div className={styles["dropdown-bar"]} onClick={handleDropdownToggle}>
+      <div
+        className={styles["dropdown-bar"]}
+        aria-label={id}
+        onClick={handleDropdownToggle}
+      >
         <span className={styles["dropdown-bar_icon"]}>{icon}</span>
         <span className={styles["dropdown-bar_value"]}>
           {selectedValue || title}

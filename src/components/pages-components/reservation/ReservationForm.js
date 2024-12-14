@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useMemo, useReducer, useState } from "react";
 import Container from "../../grid-system/Container";
 import Dropdown from "./form-elements/Dropdown";
 import { BeerStein, CalendarDots, Clock, User } from "@phosphor-icons/react";
@@ -36,7 +36,7 @@ const dinerOptions = [
 
 const occasionOptions = ["Birthday", "Engagement", "Anniversary"];
 
-const initialTimeList = (
+export const initialTimeList = (
   startTime = "13:00",
   endTime = "23:59",
   intervalMinutes = 60
@@ -72,12 +72,12 @@ const initialTimeList = (
   return timeList;
 };
 
-const updateTime = (state, action) => {
+export const updateTime = (state, action) => {
   switch (action.type) {
     case "update_times":
       // Update in the future
       console.log(action.payload.date);
-      return ["10.00 PM"];
+      return ["10:00 PM"];
     default:
       return state;
   }
@@ -115,8 +115,17 @@ const ReservationForm = () => {
     console.log("Submited");
   };
 
+  const isSubmitButtonDisabled = useMemo(
+    () =>
+      !selectedDate || !selectedDinersNum || !selectedOcassion || !selectedTime,
+    [selectedDate, selectedDinersNum, selectedOcassion, selectedTime]
+  );
+
   return (
-    <section className={styles["reservation-form-section"]}>
+    <form
+      className={styles["reservation-form-section"]}
+      onSubmit={handleSubmit}
+    >
       <Container>
         <h2 className={styles["reservation-form_title"]}>Reservation</h2>
 
@@ -127,7 +136,7 @@ const ReservationForm = () => {
                 title="Indoor Seating"
                 inputName="seating"
                 inputValue="indoor"
-                isChecked={seatValue == "indoor"}
+                isChecked={seatValue === "indoor"}
                 setSeatValue={setSeatValue}
               />
             </div>
@@ -209,14 +218,14 @@ const ReservationForm = () => {
               buttonTag={"button"}
               type="submit"
               addStyle={{ marginTop: "15px" }}
-              onClick={handleSubmit}
+              disabled={isSubmitButtonDisabled}
             >
               Reserve a Table
             </Button>
           </div>
         </div>
       </Container>
-    </section>
+    </form>
   );
 };
 

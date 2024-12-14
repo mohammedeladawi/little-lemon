@@ -19,11 +19,16 @@
   background-color: var(--primary-color-2nd);
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   opacity: 90%;
 }
 
-.btn-primary:active {
+.btn-primary:active:not(:disabled) {
   background-color: var(--secondary-color-4th);
   color: #fff;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: no-drop;
 }
