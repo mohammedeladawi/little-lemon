@@ -1,10 +1,11 @@
-import React, { useMemo, useReducer, useState } from "react";
+import React, { useEffect, useMemo, useReducer, useState } from "react";
 import Container from "../../grid-system/Container";
 import Dropdown from "./form-elements/Dropdown";
 import { BeerStein, CalendarDots, Clock, User } from "@phosphor-icons/react";
 import styles from "./ReservationForm.module.css";
 import Button from "../../ui/buttons/Button";
 import Radio from "./form-elements/Radio";
+import { fetchAPI, submitAPI } from "../../../utils/api";
 
 const generateDateList = () => {
   const dateList = [];
@@ -76,8 +77,10 @@ export const updateTime = (state, action) => {
   switch (action.type) {
     case "update_times":
       // Update in the future
-      console.log(action.payload.date);
-      return ["10:00 PM"];
+      const date = new Date(action.payload.date);
+      const availableTimes = fetchAPI(date);
+      return availableTimes;
+
     default:
       return state;
   }
@@ -112,7 +115,13 @@ const ReservationForm = () => {
       return;
 
     // Do Action
-    console.log("Submited");
+    submitAPI({
+      seatValue,
+      selectedDate,
+      selectedDinersNum,
+      selectedOcassion,
+      selectedTime,
+    });
   };
 
   const isSubmitButtonDisabled = useMemo(

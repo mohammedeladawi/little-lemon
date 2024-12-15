@@ -3,6 +3,7 @@ import ReservationForm, {
   initialTimeList,
   updateTime,
 } from "../components/pages-components/reservation/ReservationForm";
+import { fetchAPI } from "../utils/api";
 
 describe("Reservation Form", () => {
   test("Check heading is rendered", () => {
@@ -41,7 +42,8 @@ describe("Reservation Form", () => {
     // Simulate selecting the time
     const timeDropdown = screen.getByLabelText("time"); // Target the time text
     fireEvent.click(timeDropdown); // Click to open the dropdown
-    const timeOption = screen.getByText("10:00 PM");
+    const date = new Date("12/31/2024");
+    const timeOption = screen.getByText(fetchAPI(date)[0]);
     fireEvent.click(timeOption);
 
     // Now check that the button is enabled
@@ -120,7 +122,8 @@ describe("Reservation Form", () => {
       payload: { date: getCurrentDate() },
     };
 
-    const expectedState = ["10:00 PM"];
+    const date = new Date(getCurrentDate());
+    const expectedState = fetchAPI(date);
 
     const result = updateTime(initialState, action);
     expect(result).toEqual(expectedState);
