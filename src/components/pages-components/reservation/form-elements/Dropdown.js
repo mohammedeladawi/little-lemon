@@ -12,7 +12,6 @@ const Dropdown = ({
   isSubmited,
   openDropdown,
   setOpenDropdown,
-  updateTime = null,
 }) => {
   const handleDropdownToggle = useCallback((event) => {
     event.stopPropagation();
@@ -30,12 +29,6 @@ const Dropdown = ({
 
   const handleOptionClick = useCallback((optionValue) => {
     setSelectedValue(optionValue);
-
-    // Update time by selected date
-    if (updateTime) {
-      updateTime({ type: "update_times", payload: { date: optionValue } });
-    }
-
     setOpenDropdown(null);
   }, []);
 

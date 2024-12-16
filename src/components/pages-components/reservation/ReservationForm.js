@@ -6,6 +6,7 @@ import styles from "./ReservationForm.module.css";
 import Button from "../../ui/buttons/Button";
 import Radio from "./form-elements/Radio";
 import { fetchAPI, submitAPI } from "../../../utils/api";
+import { useNavigate } from "react-router";
 
 const generateDateList = () => {
   const dateList = [];
@@ -73,13 +74,11 @@ export const initialTimeList = (
   return timeList;
 };
 
-export const updateTime = (state, action) => {
+export const updateTimeReducer = (state, action) => {
   switch (action.type) {
     case "update_times":
       // Update in the future
-      const date = new Date(action.payload.date);
-      const availableTimes = fetchAPI(date);
-      return availableTimes;
+      return action.payload.times;
 
     default:
       return state;
@@ -98,11 +97,25 @@ const ReservationForm = () => {
 
   const [openDropdown, setOpenDropdown] = useState(null);
 
-  const [timeAvailable, dispatch] = useReducer(updateTime, initialTimeList());
+  const [timeAvailable, dispatch] = useReducer(
+    updateTimeReducer,
+    initialTimeList()
+  );
 
   // Submit button
   const [isSubmited, setIsSumbited] = useState(false);
 
+  useEffect(() => {
+    // Update time by selected date
+    if (selectedDate) {
+      dispatch({
+        type: "update_times",
+        payload: { times: fetchAPI(new Date(selectedDate)) },
+      });
+    }
+  }, [selectedDate]);
+
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSumbited(true);
@@ -115,13 +128,17 @@ const ReservationForm = () => {
       return;
 
     // Do Action
-    submitAPI({
-      seatValue,
-      selectedDate,
-      selectedDinersNum,
-      selectedOcassion,
-      selectedTime,
-    });
+    if (
+      submitAPI({
+        seatValue,
+        selectedDate,
+        selectedDinersNum,
+        selectedOcassion,
+        selectedTime,
+      })
+    ) {
+      navigate("confirmed-reservation");
+    }
   };
 
   const isSubmitButtonDisabled = useMemo(
@@ -172,7 +189,6 @@ const ReservationForm = () => {
                 isSubmited={isSubmited}
                 openDropdown={openDropdown}
                 setOpenDropdown={setOpenDropdown}
-                updateTime={dispatch}
               />
             </div>
 

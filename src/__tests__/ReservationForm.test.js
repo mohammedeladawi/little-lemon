@@ -1,25 +1,38 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import ReservationForm, {
   initialTimeList,
-  updateTime,
+  updateTimeReducer,
 } from "../components/pages-components/reservation/ReservationForm";
 import { fetchAPI } from "../utils/api";
+import { MemoryRouter } from "react-router";
 
 describe("Reservation Form", () => {
   test("Check heading is rendered", () => {
-    render(<ReservationForm />);
+    render(
+      <MemoryRouter>
+        <ReservationForm />
+      </MemoryRouter>
+    );
     const reservationFormHeading = screen.getByText(/Reservation/i);
     expect(reservationFormHeading).toBeInTheDocument();
   });
 
   test("Submit button is disabled when reservation form is incomplete", () => {
-    render(<ReservationForm />);
+    render(
+      <MemoryRouter>
+        <ReservationForm />
+      </MemoryRouter>
+    );
     const submitButton = screen.getByRole("button");
     expect(submitButton).toBeDisabled();
   });
 
   test("Submit button is enabled when all fields are filled", () => {
-    render(<ReservationForm />);
+    render(
+      <MemoryRouter>
+        <ReservationForm />
+      </MemoryRouter>
+    );
 
     // Simulate selecting a date
     const dateDropdown = screen.getByText(/select date/i); // Target the text that indicates the dropdown
@@ -102,7 +115,7 @@ describe("Reservation Form", () => {
       payload: {},
     };
 
-    const result = updateTime(initialState, action);
+    const result = updateTimeReducer(initialState, action);
     expect(result).toEqual(initialState);
   });
 
@@ -119,13 +132,13 @@ describe("Reservation Form", () => {
 
     const action = {
       type: "update_times",
-      payload: { date: getCurrentDate() },
+      payload: { times: fetchAPI(new Date(getCurrentDate())) },
     };
 
     const date = new Date(getCurrentDate());
     const expectedState = fetchAPI(date);
 
-    const result = updateTime(initialState, action);
+    const result = updateTimeReducer(initialState, action);
     expect(result).toEqual(expectedState);
   });
 });
