@@ -87,7 +87,7 @@ export const updateTimeReducer = (state, action) => {
 
 const ReservationForm = () => {
   // Radio elements
-  const [seatValue, setSeatValue] = useState("indoor");
+  const [seatValue, setSeatValue] = useState("Indoor Seating");
 
   // Dropdown elements
   const [selectedDate, setSelectedDate] = useState(null);
@@ -102,9 +102,13 @@ const ReservationForm = () => {
     initialTimeList()
   );
 
-  // Submit button
-  const [isSubmited, setIsSumbited] = useState(false);
+  // Form Steps
+  const [step, setStep] = useState(1);
 
+  // Reserve a table button
+  const [isReserveClicked, setIsReserveClicked] = useState(false);
+
+  // Update times depends on dates
   useEffect(() => {
     // Update time by selected date
     if (selectedDate) {
@@ -116,141 +120,255 @@ const ReservationForm = () => {
   }, [selectedDate]);
 
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSumbited(true);
-    if (
-      !selectedDate ||
-      !selectedDinersNum ||
-      !selectedOcassion ||
-      !selectedTime
-    )
-      return;
 
-    // Do Action
-    if (
-      submitAPI({
-        seatValue,
-        selectedDate,
-        selectedDinersNum,
-        selectedOcassion,
-        selectedTime,
-      })
-    ) {
-      navigate("confirmed-reservation");
-    }
+  const handleNextStep = () => {
+    setIsReserveClicked(true);
+    setStep((state) => state + 1);
   };
 
-  const isSubmitButtonDisabled = useMemo(
-    () =>
-      !selectedDate || !selectedDinersNum || !selectedOcassion || !selectedTime,
-    [selectedDate, selectedDinersNum, selectedOcassion, selectedTime]
-  );
+  const handleBackStep = () => {
+    setStep((state) => state - 1);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Do Action
+    navigate("confirmed-reservation");
+  };
+
+  // ****************** Form Step 2 ********************************
+  const [policyAgreement, setPolicyAgreement] = useState(null);
 
   return (
-    <form
-      className={styles["reservation-form-section"]}
-      onSubmit={handleSubmit}
-    >
-      <Container>
-        <h2 className={styles["reservation-form_title"]}>Reservation</h2>
+    // Form Step 1
+    <>
+      {step === 1 && (
+        <form className={styles["reservation-form-section"]}>
+          <div className={styles["reservation-form-section_inputs"]}>
+            <Container>
+              <h2 className={styles["reservation-form_title"]}>Reservation</h2>
 
-        <div className={styles["reservation-form"]}>
-          <div className={styles["reservation-form_inputs"]}>
-            <div className={styles["radio"]}>
-              <Radio
-                title="Indoor Seating"
-                inputName="seating"
-                inputValue="indoor"
-                isChecked={seatValue === "indoor"}
-                setSeatValue={setSeatValue}
-              />
-            </div>
+              <div className={styles["reservation-form_inputs"]}>
+                <div className={styles["radio"]}>
+                  <Radio
+                    title="Indoor Seating"
+                    inputName="seating"
+                    inputValue="Indoor Seating"
+                    isChecked={seatValue === "Indoor Seating"}
+                    setCheckedValue={setSeatValue}
+                  />
+                </div>
 
-            <div className={styles["radio"]}>
-              <Radio
-                title="Outdoor Seating"
-                inputName="seating"
-                inputValue="outdoor"
-                isChecked={seatValue === "outdoor"}
-                setSeatValue={setSeatValue}
-              />
-            </div>
+                <div className={styles["radio"]}>
+                  <Radio
+                    title="Outdoor Seating"
+                    inputName="seating"
+                    inputValue="Outdoor Seating"
+                    isChecked={seatValue === "Outdoor Seating"}
+                    setCheckedValue={setSeatValue}
+                  />
+                </div>
 
-            <div className={styles["select"]} id="date-container">
-              <label>Date</label>
-              <Dropdown
-                id="date"
-                title="Select Date"
-                optionItems={generateDateList()}
-                icon={<CalendarDots size={24} />}
-                selectedValue={selectedDate}
-                setSelectedValue={setSelectedDate}
-                isSubmited={isSubmited}
-                openDropdown={openDropdown}
-                setOpenDropdown={setOpenDropdown}
-              />
-            </div>
+                <div className={styles["select"]} id="date-container">
+                  <label>Date</label>
+                  <Dropdown
+                    id="date"
+                    title="Select Date"
+                    optionItems={generateDateList()}
+                    icon={<CalendarDots size={24} />}
+                    selectedValue={selectedDate}
+                    setSelectedValue={setSelectedDate}
+                    isReserveClicked={isReserveClicked}
+                    openDropdown={openDropdown}
+                    setOpenDropdown={setOpenDropdown}
+                  />
+                </div>
 
-            <div className={styles["select"]}>
-              <label>Number of Diners</label>
-              <Dropdown
-                id="diners"
-                title="No. of Diners"
-                optionItems={dinerOptions}
-                icon={<User size={24} />}
-                selectedValue={selectedDinersNum}
-                setSelectedValue={setSelectedDinersNum}
-                isSubmited={isSubmited}
-                openDropdown={openDropdown}
-                setOpenDropdown={setOpenDropdown}
-              />
-            </div>
+                <div className={styles["select"]}>
+                  <label>Number of Diners</label>
+                  <Dropdown
+                    id="diners"
+                    title="No. of Diners"
+                    optionItems={dinerOptions}
+                    icon={<User size={24} />}
+                    selectedValue={selectedDinersNum}
+                    setSelectedValue={setSelectedDinersNum}
+                    isReserveClicked={isReserveClicked}
+                    openDropdown={openDropdown}
+                    setOpenDropdown={setOpenDropdown}
+                  />
+                </div>
 
-            <div className={styles["select"]}>
-              <label>Ocassion</label>
-              <Dropdown
-                id="ocassion"
-                title="Ocassion"
-                icon={<BeerStein size={24} />}
-                optionItems={occasionOptions}
-                selectedValue={selectedOcassion}
-                setSelectedValue={setSelectedOcassion}
-                isSubmited={isSubmited}
-                openDropdown={openDropdown}
-                setOpenDropdown={setOpenDropdown}
-              />
-            </div>
+                <div className={styles["select"]}>
+                  <label>Ocassion</label>
+                  <Dropdown
+                    id="ocassion"
+                    title="Ocassion"
+                    icon={<BeerStein size={24} />}
+                    optionItems={occasionOptions}
+                    selectedValue={selectedOcassion}
+                    setSelectedValue={setSelectedOcassion}
+                    isReserveClicked={isReserveClicked}
+                    openDropdown={openDropdown}
+                    setOpenDropdown={setOpenDropdown}
+                  />
+                </div>
 
-            <div className={styles["select"]}>
-              <label>Time</label>
-              <Dropdown
-                id="time"
-                title="Time"
-                icon={<Clock size={24} />}
-                optionItems={timeAvailable}
-                selectedValue={selectedTime}
-                setSelectedValue={setSelectedTime}
-                isSubmited={isSubmited}
-                openDropdown={openDropdown}
-                setOpenDropdown={setOpenDropdown}
-              />
-            </div>
+                <div className={styles["select"]}>
+                  <label>Time</label>
+                  <Dropdown
+                    id="time"
+                    title="Time"
+                    icon={<Clock size={24} />}
+                    optionItems={timeAvailable}
+                    selectedValue={selectedTime}
+                    setSelectedValue={setSelectedTime}
+                    isReserveClicked={isReserveClicked}
+                    openDropdown={openDropdown}
+                    setOpenDropdown={setOpenDropdown}
+                  />
+                </div>
+              </div>
+            </Container>
           </div>
-
           <div className={styles["reservation-form_submit"]}>
             <Button
               buttonTag={"button"}
               type="submit"
               addStyle={{ marginTop: "15px" }}
-              disabled={isSubmitButtonDisabled}
+              onClick={handleNextStep}
             >
               Reserve a Table
             </Button>
           </div>
-        </div>
-      </Container>
-    </form>
+        </form>
+      )}
+
+      {step === 2 && (
+        <form className={styles["reservation-form-section"]}>
+          <div className={styles["reservation-form-section_inputs"]}>
+            <Container>
+              <div
+                className={`${styles["reservation-form_inputs"]} ${styles["second-step"]}`}
+              >
+                <div>
+                  <label htmlFor="first-name">First Name</label>
+                  <input
+                    className={styles["second-step-input"]}
+                    type="text"
+                    id="first-name"
+                    name="first-name"
+                    placeholder="First Name"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="last-name">Last Name</label>
+                  <input
+                    className={styles["second-step-input"]}
+                    type="text"
+                    id="last-name"
+                    name="last-name"
+                    placeholder="Last Name"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email">Email</label>
+                  <input
+                    className={styles["second-step-input"]}
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="yours@email.com"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="phone">Phone</label>
+                  <input
+                    className={styles["second-step-input"]}
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="002"
+                  />
+                </div>
+
+                <div id={styles["first-step-values"]} onClick={handleBackStep}>
+                  <div
+                    className={`${styles["first-step-value"]} ${
+                      selectedTime ? "" : styles["warning"]
+                    }`}
+                  >
+                    <Clock size={20} />
+                    <span>{selectedTime || "Select Time"} </span>
+                  </div>
+                  <div
+                    className={`${styles["first-step-value"]} ${
+                      selectedDinersNum ? "" : styles["warning"]
+                    }`}
+                  >
+                    <User size={20} />
+                    <span>{selectedDinersNum || "No. of Diners"}</span>
+                  </div>
+                  <div
+                    className={`${styles["first-step-value"]} ${
+                      selectedOcassion ? "" : styles["warning"]
+                    }`}
+                  >
+                    <BeerStein size={20} />
+                    <span>{selectedOcassion || "Occasion"}</span>
+                  </div>
+                  <div
+                    className={`${styles["first-step-value"]} ${
+                      selectedDate ? "" : styles["warning"]
+                    }`}
+                  >
+                    <CalendarDots size={20} />
+                    <span>{selectedDate || "Select Date"}</span>
+                  </div>
+                  <div
+                    className={`${styles["first-step-value"]} ${
+                      seatValue ? "" : styles["warning"]
+                    }`}
+                  >
+                    <span>{seatValue}</span>
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="comment">Comment</label>
+                  <textarea
+                    className={styles["second-step-placeholder"]}
+                    placeholder="Comment"
+                    id="comment"
+                  ></textarea>
+                </div>
+                <div className={styles["radio"]}>
+                  <Radio
+                    title="Do you agree privacy policy "
+                    inputName="policy-agreement"
+                    inputValue="agree"
+                    isChecked={policyAgreement === "agree"}
+                    setCheckedValue={setPolicyAgreement}
+                  />
+                </div>
+              </div>
+            </Container>
+          </div>
+          <div className={styles["reservation-form_submit"]}>
+            <Button
+              buttonTag={"button"}
+              type="submit"
+              addStyle={{ marginTop: "15px" }}
+              onClick={handleSubmit}
+            >
+              Confirm Reservation
+            </Button>
+          </div>
+        </form>
+      )}
+    </>
   );
 };
 

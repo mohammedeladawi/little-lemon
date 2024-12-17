@@ -1,13 +1,5 @@
-.reservation-form-section {
+.reservation-form-section_inputs {
   background-color: var(--primary-color-1st);
-}
-
-.reservation-form_title {
-  font-family: "Karla", "sans-serif";
-  color: var(--primary-color-2nd);
-  font-size: 42px;
-  font-weight: 700;
-  margin-bottom: 20px;
 }
 
 .reservation-form_inputs {
@@ -15,6 +7,21 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 15px;
+  margin-bottom: 20px;
+}
+
+.reservation-form_submit {
+  width: fit-content;
+  margin: 20px auto;
+}
+
+/* First Step */
+.reservation-form_title {
+  font-family: "Karla", "sans-serif";
+  color: var(--primary-color-2nd);
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
 
 @media (max-width: 576px) {
@@ -29,6 +36,7 @@
 
 .reservation-form_inputs label {
   color: var(--secondary-color-3rd);
+  font-size: 20px;
 }
 
 .reservation-form_inputs .radio label {
@@ -57,8 +65,62 @@
   display: block;
 }
 
-.reservation-form_submit {
-  margin-top: 20px;
+/* Second Step */
+@media (max-width: 576px) {
+  .reservation-form_inputs.second-step {
+    flex-direction: column;
+  }
+}
+
+.second-step-input {
+  height: 40px;
+}
+
+.second-step-placeholder {
+  resize: none;
+  height: 100px;
+}
+
+.second-step-placeholder,
+.second-step-input {
+  display: block;
+  width: 100%;
+  margin-top: 3px;
+  padding: 15px;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--secondary-color-3rd);
+}
+
+#first-step-values {
+  cursor: pointer;
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 576px) {
+  #first-step-values {
+    order: 2;
+  }
+}
+
+.first-step-value {
+  color: #fff;
+  flex: 1 1 48%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+}
+
+.warning {
+  color: var(--secondary-color-1st);
+}
+
+@media (max-width: 576px) {
+  .reservation-form_inputs.second-step > .radio {
+    width: 100%;
+    order: 3;
+  }
 }

@@ -9,7 +9,7 @@ const Dropdown = ({
   optionItems,
   selectedValue,
   setSelectedValue,
-  isSubmited,
+  isReserveClicked,
   openDropdown,
   setOpenDropdown,
 }) => {
@@ -64,7 +64,7 @@ const Dropdown = ({
           </li>
         ))}
       </ul>
-      {isSubmited && !selectedValue && (
+      {isReserveClicked && !selectedValue && (
         <p className={styles["error-message"]}>This item is required</p>
       )}
     </div>

@@ -1,9 +1,15 @@
 import React, { useCallback, useState } from "react";
 import styles from "./Radio.module.css";
 
-const Radio = ({ title, inputName, inputValue, isChecked, setSeatValue }) => {
+const Radio = ({
+  title,
+  inputName,
+  inputValue,
+  isChecked,
+  setCheckedValue,
+}) => {
   const handleInputChange = useCallback(() => {
-    setSeatValue(inputValue);
+    setCheckedValue(inputValue);
   }, []);
 
   return (
