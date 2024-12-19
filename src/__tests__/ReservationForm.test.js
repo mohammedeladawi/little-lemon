@@ -1,6 +1,11 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  act,
+  waitFor,
+} from "@testing-library/react";
 import ReservationForm, {
-  initialTimeList,
   updateTimeReducer,
 } from "../components/pages-components/reservation/ReservationForm";
 import { fetchAPI } from "../utils/api";
@@ -17,17 +22,25 @@ describe("Reservation Form", () => {
     expect(reservationFormHeading).toBeInTheDocument();
   });
 
-  test("Submit button is disabled when reservation form is incomplete", () => {
+  test("Submit button is disabled when reservation form is incomplete", async () => {
     render(
       <MemoryRouter>
         <ReservationForm />
       </MemoryRouter>
     );
-    const submitButton = screen.getByRole("button");
-    expect(submitButton).toBeDisabled();
+    const nextStepButton = screen.getByRole("button", {
+      name: /reserve a table/i,
+    });
+    fireEvent.click(nextStepButton);
+
+    const submitButton = screen.getByRole("button", {
+      name: /confirm reservation/i,
+    });
+
+    await waitFor(() => expect(submitButton).toBeDisabled());
   });
 
-  test("Submit button is enabled when all fields are filled", () => {
+  test("Submit button is enabled when reservation form is filled", async () => {
     render(
       <MemoryRouter>
         <ReservationForm />
@@ -36,80 +49,80 @@ describe("Reservation Form", () => {
 
     // Simulate selecting a date
     const dateDropdown = screen.getByText(/select date/i); // Target the text that indicates the dropdown
-    fireEvent.click(dateDropdown); // Click to open the dropdown
+    await act(async () => {
+      fireEvent.click(dateDropdown); // Click to open the dropdown
+    });
     const dateOption = screen.getByText("12/31/2024"); // Select the option you want
-    fireEvent.click(dateOption);
+    await act(async () => {
+      fireEvent.click(dateOption); // Select the date
+    });
 
     // Simulate selecting the number of diners
     const dinersDropdown = screen.getByText(/no\. of diners/i); // Target the number of diners text
-    fireEvent.click(dinersDropdown); // Click to open the dropdown
+    await act(async () => {
+      fireEvent.click(dinersDropdown); // Click to open the dropdown
+    });
     const dinersOption = screen.getByText("2 Diners");
-    fireEvent.click(dinersOption);
+    await act(async () => {
+      fireEvent.click(dinersOption); // Select number of diners
+    });
 
     // Simulate selecting the occasion
-    const occasionDropdown = screen.getByLabelText("ocassion"); // Target the occasion text
-    fireEvent.click(occasionDropdown); // Click to open the dropdown
+    const occasionDropdown = screen.getByTestId("occasion"); // Target the occasion text
+    await act(async () => {
+      fireEvent.click(occasionDropdown); // Click to open the dropdown
+    });
     const occasionOption = screen.getByText("Birthday");
-    fireEvent.click(occasionOption);
+    await act(async () => {
+      fireEvent.click(occasionOption); // Select the occasion
+    });
 
     // Simulate selecting the time
-    const timeDropdown = screen.getByLabelText("time"); // Target the time text
-    fireEvent.click(timeDropdown); // Click to open the dropdown
+    const timeDropdown = screen.getByTestId("time"); // Target the time text
+    await act(async () => {
+      fireEvent.click(timeDropdown); // Click to open the dropdown
+    });
     const date = new Date("12/31/2024");
     const timeOption = screen.getByText(fetchAPI(date)[0]);
-    fireEvent.click(timeOption);
+    await act(async () => {
+      fireEvent.click(timeOption); // Select the time
+    });
 
-    // Now check that the button is enabled
-    const submitButton = screen.getByRole("button", {
+    // Simulate user filling out the reservation form
+    const nextStepButton = screen.getByRole("button", {
       name: /reserve a table/i,
     });
-    expect(submitButton).toBeEnabled();
-  });
+    await act(async () => {
+      fireEvent.click(nextStepButton);
+    });
 
-  test("IntialTimeList returns the expected values", () => {
-    const initialTime = initialTimeList();
+    const firstName = screen.getByLabelText(/first name/i);
+    fireEvent.change(firstName, { target: { value: "Mohammed" } });
 
-    const expectedTime = ((
-      startTime = "13:00",
-      endTime = "23:59",
-      intervalMinutes = 60
-    ) => {
-      const timeList = [];
-      const start = startTime.split(":");
-      const end = endTime.split(":");
-      let currentHour = parseInt(start[0], 10);
-      let currentMinute = parseInt(start[1], 10);
+    const lastName = screen.getByLabelText(/last name/i);
+    fireEvent.change(lastName, { target: { value: "Eladawi" } });
 
-      const endHour = parseInt(end[0], 10);
-      const endMinute = parseInt(end[1], 10);
+    const email = screen.getByLabelText(/email/i);
+    fireEvent.change(email, { target: { value: "mohammed@gmail.com" } });
 
-      while (
-        currentHour < endHour ||
-        (currentHour === endHour && currentMinute <= endMinute)
-      ) {
-        const hour12 = currentHour % 12 || 12; // 12-hour format
-        const ampm = currentHour < 12 ? "AM" : "PM";
-        const formattedTime = `${hour12}:${currentMinute
-          .toString()
-          .padStart(2, "0")} ${ampm}`;
-        timeList.push(formattedTime);
+    const phone = screen.getByLabelText(/phone/i);
+    fireEvent.change(phone, { target: { value: "00201024585724" } });
 
-        // Increment time by the interval
-        currentMinute += intervalMinutes;
-        if (currentMinute >= 60) {
-          currentMinute = 0;
-          currentHour += 1;
-        }
-      }
+    const policyAgreement = screen.getByLabelText(
+      /Do you agree privacy policy/i
+    );
+    fireEvent.click(policyAgreement);
 
-      return timeList;
-    })();
+    const submitButton = screen.getByRole("button", {
+      name: /confirm reservation/i,
+    });
 
-    expect(initialTime).toEqual(expectedTime);
+    // expect(submitButton).not.toBeDisabled();
+    await waitFor(() => expect(submitButton).toBeEnabled());
   });
 
   test("updatedTime function returns the same provided date in the state when the action is invalid", () => {
-    const initialState = ["12:00 PM", "1:00 PM", "2:00 PM"];
+    const initialState = [];
     const action = {
       type: "invalid_action",
       payload: {},
@@ -120,7 +133,7 @@ describe("Reservation Form", () => {
   });
 
   test("updatedTime function returns the same provided date in the state when the action is valid", () => {
-    const initialState = ["12:00 PM", "1:00 PM", "2:00 PM"];
+    const initialState = [];
     const getCurrentDate = () => {
       const today = new Date();
       const month = today.getMonth() + 1; // Months are zero-indexed, so add 1

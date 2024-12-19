@@ -46,6 +46,10 @@
   font-size: 18px;
 }
 
+.required-asterisk {
+  color: var(--secondary-color-1st);
+}
+
 .reservation-form_inputs .radio {
   width: 170px;
 }

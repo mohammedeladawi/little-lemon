@@ -1,16 +1,12 @@
-.custom-label {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
 .custom-radio {
+  display: inline-block;
   width: 20px;
   height: 20px;
   background-color: transparent;
   border-radius: 50%;
   border: 2px solid #fff;
   position: relative;
+  margin: 0 10px;
 }
 
 .custom-radio .inner-circle {
