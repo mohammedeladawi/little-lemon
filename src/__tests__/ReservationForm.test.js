@@ -22,7 +22,7 @@ describe("Reservation Form", () => {
     expect(reservationFormHeading).toBeInTheDocument();
   });
 
-  test("Submit button is disabled when reservation form is incomplete", async () => {
+  test("Submit button is disabled when reservation form is incompleted", async () => {
     render(
       <MemoryRouter>
         <ReservationForm />
@@ -49,9 +49,7 @@ describe("Reservation Form", () => {
 
     // Simulate selecting a date
     const dateDropdown = screen.getByText(/select date/i); // Target the text that indicates the dropdown
-    await act(async () => {
-      fireEvent.click(dateDropdown); // Click to open the dropdown
-    });
+    fireEvent.click(dateDropdown); // Click to open the dropdown
     const dateOption = screen.getByText("12/31/2024"); // Select the option you want
     await act(async () => {
       fireEvent.click(dateOption); // Select the date
@@ -59,9 +57,7 @@ describe("Reservation Form", () => {
 
     // Simulate selecting the number of diners
     const dinersDropdown = screen.getByText(/no\. of diners/i); // Target the number of diners text
-    await act(async () => {
-      fireEvent.click(dinersDropdown); // Click to open the dropdown
-    });
+    fireEvent.click(dinersDropdown); // Click to open the dropdown
     const dinersOption = screen.getByText("2 Diners");
     await act(async () => {
       fireEvent.click(dinersOption); // Select number of diners
@@ -69,9 +65,7 @@ describe("Reservation Form", () => {
 
     // Simulate selecting the occasion
     const occasionDropdown = screen.getByTestId("occasion"); // Target the occasion text
-    await act(async () => {
-      fireEvent.click(occasionDropdown); // Click to open the dropdown
-    });
+    fireEvent.click(occasionDropdown); // Click to open the dropdown
     const occasionOption = screen.getByText("Birthday");
     await act(async () => {
       fireEvent.click(occasionOption); // Select the occasion
@@ -79,9 +73,8 @@ describe("Reservation Form", () => {
 
     // Simulate selecting the time
     const timeDropdown = screen.getByTestId("time"); // Target the time text
-    await act(async () => {
-      fireEvent.click(timeDropdown); // Click to open the dropdown
-    });
+
+    fireEvent.click(timeDropdown); // Click to open the dropdown
     const date = new Date("12/31/2024");
     const timeOption = screen.getByText(fetchAPI(date)[0]);
     await act(async () => {
@@ -92,9 +85,7 @@ describe("Reservation Form", () => {
     const nextStepButton = screen.getByRole("button", {
       name: /reserve a table/i,
     });
-    await act(async () => {
-      fireEvent.click(nextStepButton);
-    });
+    fireEvent.click(nextStepButton);
 
     const firstName = screen.getByLabelText(/first name/i);
     fireEvent.change(firstName, { target: { value: "Mohammed" } });

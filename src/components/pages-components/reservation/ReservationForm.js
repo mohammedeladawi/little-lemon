@@ -10,6 +10,8 @@ import { useNavigate } from "react-router";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import ErrorMessage from "./form-elements/ErrorMessage";
+import ConfirmModal from "../../ui/modals/ConfirmModal";
+import PopupMessage from "../../ui/popup-message/PopupMessage";
 
 const generateDateList = () => {
   const dateList = [];
@@ -55,6 +57,8 @@ export const updateTimeReducer = (state, action) => {
 const ReservationForm = () => {
   const navigate = useNavigate();
 
+  const [formData, setFormData] = useState(null);
+
   const {
     values,
     setFieldValue,
@@ -66,6 +70,7 @@ const ReservationForm = () => {
     handleBlur,
     isValid,
     dirty,
+    resetForm,
   } = useFormik({
     initialValues: {
       // Step 1
@@ -95,14 +100,19 @@ const ReservationForm = () => {
       email: Yup.string()
         .email("Invalid email format")
         .required("Email is required"),
-      phone: Yup.string().required("Phone number is required"),
+      phone: Yup.string()
+        .matches(
+          /^(\+|00)[0-9]{1,3}[0-9]{4,14}$/,
+          "Enter a valid international phone number, e.g., +201024585724 or 00201024585724"
+        )
+        .required("Phone number is required"),
       policyAgreement: Yup.string()
         .oneOf(["agree"], "You must agree to the privacy policy") // Ensure 'agree' is selected
         .required("Please agree to the privacy policy"), // Makes the field required
     }),
     onSubmit: (values) => {
-      console.log("Form Submitted:", values);
-      submitAPI(values) && navigate("confirmed-reservation");
+      setFormData(values);
+      setIsConfirmModalOpen(true);
     },
   });
 
@@ -127,6 +137,33 @@ const ReservationForm = () => {
 
   const handleBackStep = () => {
     setStep((state) => state - 1);
+  };
+
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
+
+  const handleConfirm = async () => {
+    setIsConfirmModalOpen(false);
+
+    // Helper function for delay
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    // First delay before the popup message
+    await delay(500);
+    submitAPI(formData);
+    console.log(formData);
+    resetForm();
+    setPopupMessage("Your reservation has been confirmed. Check your email");
+
+    // Second delay before clearing the popup and navigating
+    await delay(3000);
+    setPopupMessage(""); // Clear the popup
+    navigate("/"); // Navigate to the home page
+  };
+
+  const handleCancel = () => {
+    setIsConfirmModalOpen(false);
+    console.log("cancel clicked");
   };
 
   return (
@@ -285,6 +322,7 @@ const ReservationForm = () => {
                     value={values.firstName}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   />
                   {touched.firstName && errors.firstName && (
                     <ErrorMessage>{errors.firstName}</ErrorMessage>
@@ -305,6 +343,7 @@ const ReservationForm = () => {
                     value={values.lastName}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   />
                   {touched.lastName && errors.lastName && (
                     <ErrorMessage>{errors.lastName}</ErrorMessage>
@@ -324,6 +363,7 @@ const ReservationForm = () => {
                     value={values.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   />
                   {touched.email && errors.email && (
                     <ErrorMessage>{errors.email}</ErrorMessage>
@@ -340,9 +380,11 @@ const ReservationForm = () => {
                     id="phone"
                     name="phone"
                     placeholder="002"
+                    pattern="(\+|00)[0-9]{1,3}[0-9]{4,14}"
                     value={values.phone}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   />
                   {touched.phone && errors.phone && (
                     <ErrorMessage>{errors.phone}</ErrorMessage>
@@ -397,6 +439,7 @@ const ReservationForm = () => {
                     placeholder="Comment"
                     id="comment"
                     name="comment"
+                    required
                     onChange={handleChange}
                   ></textarea>
                 </div>
@@ -427,6 +470,16 @@ const ReservationForm = () => {
           </div>
         </form>
       )}
+
+      <ConfirmModal
+        isOpen={isConfirmModalOpen}
+        title={"🍕"}
+        message={"Are you sure you want to confirm reservation?"}
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+      />
+
+      <PopupMessage message={popupMessage} />
     </>
   );
 };

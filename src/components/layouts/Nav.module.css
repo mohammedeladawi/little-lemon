@@ -104,6 +104,8 @@
     cursor: pointer;
     padding: 20px;
     font-weight: bold;
+    background-color: transparent;
+    border: none;
   }
 
   .nav-menu .close-menu:hover {

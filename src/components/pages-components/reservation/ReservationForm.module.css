@@ -96,6 +96,10 @@
   background-color: var(--secondary-color-3rd);
 }
 
+.second-step-input:focus:invalid {
+  border: 2px solid var(--secondary-color-1st);
+}
+
 #first-step-values {
   cursor: pointer;
   display: flex;

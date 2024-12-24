@@ -1,0 +1,5 @@
+.popup {
+  font-size: 22px;
+  color: var(--primary-color-1st);
+  text-transform: capitalize;
+}

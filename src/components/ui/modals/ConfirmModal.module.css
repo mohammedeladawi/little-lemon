@@ -1,0 +1,26 @@
+.confirm-title {
+  font-size: 60px;
+}
+
+.confirm-message {
+  color: #000;
+  margin: 15px 0;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 40px;
+  margin: 0 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.btn-confirm {
+  background-color: var(--secondary-color-4th);
+  color: #fff;
+}
+
+.btn-cancel {
+  background-color: transparent;
+  border: 1px solid var(--primary-color-1st);
+}
